@@ -1,5 +1,6 @@
 const { expect } = require('@jest/globals');
 const { getTwoByConsole } = require('../src/script');
+const { getGameByName } = require('../src/script');
 
 describe('Script tests', () => {
   describe('getTwoByConsole', () => {
@@ -45,11 +46,12 @@ describe('Script tests', () => {
 
   describe('getGameByName', () => {
     it('Should return the Resident evil 2 game', () => {
-      expect(0).toBeTruthy();
+      const name = 'Resident Evil 2';
+      expect(getGameByName(name).name.toLowerCase()).toEqual(name.toLowerCase());
     });
 
     it('Should return undefined when not found', () => {
-      expect(0).toBeTruthy();
+      expect(getGameByName('juego que no existe')).toEqual(undefined);
     });
   });
 
