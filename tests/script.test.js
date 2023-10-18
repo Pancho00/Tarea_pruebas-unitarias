@@ -1,6 +1,7 @@
 const { expect } = require('@jest/globals');
 const { getTwoByConsole } = require('../src/script');
 const { getGameByName } = require('../src/script');
+const { getGamesByGenre } = require('../src/script');
 
 describe('Script tests', () => {
   describe('getTwoByConsole', () => {
@@ -57,7 +58,10 @@ describe('Script tests', () => {
 
   describe('getGamesByGenre', () => {
     it('Should return a list of games by Action genre', () => {
-      expect(0).toBeTruthy();
+      list = getGamesByGenre('action');
+      list.forEach((game) => {
+        expect(game.genres.toLowerCase()).toEqual('Action');
+      });
     });
     it('Should return a empty list when the genre doesnt exists', () => {
       expect(0).toBeTruthy();
