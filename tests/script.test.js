@@ -77,20 +77,25 @@ describe("Script tests", () => {
     });
   });
 
-  describe("getGameByName", () => {
-    it("Should return the Resident evil 2 game", () => {
-      expect(0).toBeTruthy();
+  describe('getGameByName', () => {
+    it('Should return the Resident evil 2 game', () => {
+      const name = 'Resident Evil 2';
+      expect(getGameByName(name).name.toLowerCase()).toEqual(name.toLowerCase());
     });
 
-    it("Should return undefined when not found", () => {
-      expect(0).toBeTruthy();
+    it('Should return undefined when not found', () => {
+      expect(getGameByName('juego que no existe')).toEqual(undefined);
     });
   });
 
   describe("getGamesByGenre", () => {
-    it("Should return a list of games by Action genre", () => {
-      expect(0).toBeTruthy();
+    it('Should return a list of games by Action genre', () => {
+      list = getGamesByGenre('action');
+      list.forEach((game) => {
+        expect(game.genres.toLowerCase()).toEqual('Action');
+      });
     });
+    
     it('Should return a empty list when the genre doesnt exists', () => {
       const genre = "non-existent genre";
       const gamesList = getGamesByGenre(genre);
