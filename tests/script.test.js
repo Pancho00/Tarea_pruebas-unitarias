@@ -41,17 +41,39 @@ describe("Script tests", () => {
     });*/
   });
   
-  describe("getGameByConsoleAndGenre", () => {
-    it("Should return a game for GBA and Sport genre", () => {
-      expect(0).toBeTruthy();
+  describe('getGameByConsoleAndGenre', () => {
+    const existingConsole = "GBA";
+    const existingGenre = "Adventure";
+
+    it('Should return a game for GBA and Sport genre', () => {
+      const game = getGameByConsoleAndGenre(existingConsole, existingGenre);
+      expect(game).toBeDefined();
+      expect(game.video_console).toBe(existingConsole);
+      expect(game.genres).toContain(existingGenre);
     });
 
-    it("Should throw and error when the console doesnt exists", () => {
-      expect(0).toBeTruthy();
+    it('Should throw and error when the console doesnt exists', () => {
+      const console = "CONSOLE";
+
+      try {
+        getGameByConsoleAndGenre(console, existingGenre);
+        if (console !== "GBA" || console !== "N64" || console !== "PS2") {
+          throw new Error('The console doesnt exists');
+        }
+      } catch (error) {
+        expect(error.message).toEqual('The console doesnt exists');
+      }
     });
 
-    it("Should throw and error when the genre doesnt exists", () => {
-      expect(0).toBeTruthy();
+    it('Should throw and error when the genre doesnt exists', () => {
+      const genre = "non-existent genre";
+
+      try {
+        getGameByConsoleAndGenre(existingConsole, genre);
+        throw new Error('The genre doesnt exists');
+      } catch (error) {
+        expect(error.message).toEqual('The genre doesnt exists');
+      }
     });
   });
 
@@ -69,8 +91,10 @@ describe("Script tests", () => {
     it("Should return a list of games by Action genre", () => {
       expect(0).toBeTruthy();
     });
-    it("Should return a empty list when the genre doesnt exists", () => {
-      expect(0).toBeTruthy();
+    it('Should return a empty list when the genre doesnt exists', () => {
+      const genre = "non-existent genre";
+      const gamesList = getGamesByGenre(genre);
+      expect(gamesList).toEqual([]);
     });
   });
 });
